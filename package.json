@@ -34,8 +34,8 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.1.1",
     "morgan": "^1.9.0",
+    "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "ws": "^5.1.1"
   },
