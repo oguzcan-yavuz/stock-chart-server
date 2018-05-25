@@ -1,23 +1,24 @@
 'use strict';
 
 const WebSocket = require('ws');
-const getStock = require('../api/getStock.js');
+const stockHandler = require('../api/stocksHandler.js');
 
 module.exports = (server) => {
   const wss = new WebSocket.Server({ server: server });
-  wss.on('connection', (ws) => {
+  wss.on('connection', async (ws) => {
+    // send all stocks saved in db to the client at the initialization.
+    ws.send(JSON.stringify(await stockHandler.getAllStocks()));
     ws.on('message', async (data) => {
-      // when we got a message, check if the operator is ADD or DELETE.
-      // if it's ADD, add the new symbol to the db and send all symbols(?) back to the client
-      // if it's DELETE, delete the new symbol from the db and send all symbols(?) again to the client
+      // client will send an `operator` property inside of the data object. check it's value to decide ADD or DELETE
       data = JSON.parse(data);
+      let symbol = data.symbol.toUpperCase(), operator = data.operator.toUpperCase();
       console.log('received data:', data);
-      if(data.operator === 'ADD') {
-        let results = await getStock(data.symbol);
-        ws.send(results);
-      }
+      if(operator === 'ADD')
+        await stockHandler.addStock(symbol);
+      else if(operator === 'DELETE')
+        await stockHandler.deleteStock(symbol);
+      let stocks = await stockHandler.getAllStocks();
+      ws.send(JSON.stringify(stocks));
     });
-    // send all stocks saved in db in here when connection established.
-    ws.send(JSON.stringify({ message: 'Connection established!' }));
   })
 };
