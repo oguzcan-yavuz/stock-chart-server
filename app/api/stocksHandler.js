@@ -77,7 +77,7 @@ function requestParser(stock) {
     return { error: "Not found" };
   return {
     symbol: stock["Meta Data"]["2. Symbol"], data: Object.entries(stock["Time Series (Daily)"]).map(day => {
-      return {date: day[0], open: day[1]["1. open"], close: day[1]["4. close"]};
+      return { date: day[0], open: day[1]["1. open"], close: day[1]["4. close"] };
     })
   };
 }
@@ -99,9 +99,9 @@ function setUpdateStocks() {
   // calls the updateStocks function each day at 01:00 AM
   let now = new Date();
   let oneDay = 86400000;
-  let millis = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 1, 0, 0, 0) - now;
-  // setTimeout(setInterval(updateStocks, oneDay), millis);
+  let millis = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 4, 0, 0, 0) - now;
   setTimeout(() => {
+    updateStocks();
     setInterval(updateStocks, oneDay)
   }, millis);
 }
