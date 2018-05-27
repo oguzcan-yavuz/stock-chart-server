@@ -69,7 +69,7 @@ async function updateStocks() {
 
 function dbParser(stocks) {
   if(stocks.length === 0)
-    return { error: "Not found" };
+    return { error: "Empty stocks" };
   else
     return stocks.map(stock => stock.stock);
 }
