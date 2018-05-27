@@ -1,5 +1,5 @@
 # stock-chart-server
-Freecodecamp Dynamic Web Application Project: Chart the Stock Market
+Freecodecamp Dynamic Web Application Project: Chart the Stock Market (Back-end)
 
 ### My Notes:
 
