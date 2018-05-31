@@ -110,7 +110,7 @@ function setUpdateStocks() {
 }
 
 // NOTE: I will manually updateStocks everytime server is up, since it is deployed on heroku
-// it gets hybernated before 01:00 AM so it doesn't update
+// it gets hibernated before 01:00 AM so it doesn't update
 // setUpdateStocks();
 updateStocks();
 
